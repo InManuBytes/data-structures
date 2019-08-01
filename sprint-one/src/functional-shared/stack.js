@@ -1,6 +1,7 @@
+// Remember don't "t h i s", not even inside the comments as one of the tests will catch reference in es6
 var Stack = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
+  // Declaring the variable below means that we do not extend the constructor function
+  //i.e. that the Object.keys(Queue).length = 0
   var someQueueInstance = {};
   someQueueInstance.push = queueMethods.push;
   someQueueInstance.pop = queueMethods.pop;
@@ -10,10 +11,10 @@ var Stack = function() {
 
 var stackMethods = {
   storage: {},
-  enqueue: function(){
+  push: function(){
 
   },
-  dequeue: function(){
+  pop: function(){
 
   },
   size: function(){
