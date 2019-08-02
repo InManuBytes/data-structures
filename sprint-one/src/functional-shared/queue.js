@@ -18,16 +18,15 @@ var queueMethods = {
     queueMethods.storage[nextKey] = value;
   },
   dequeue: function(){
-    var firstIn = queueMethods.storage[0];
+    let firstIn = queueMethods.storage[0];
     delete queueMethods.storage[0];
     keys = Object.keys(queueMethods.storage);
     keys.forEach(key => {
       newKey = Number(key)-1;
       oldKey = Number(key);
       queueMethods.storage[newKey] = queueMethods.storage[oldKey];
+      delete queueMethods.storage[oldKey];
     });
-    lastKey = keys[keys.length-1];
-    delete queueMethods.storage[lastKey];
     return firstIn;
   },
   size: function(){
