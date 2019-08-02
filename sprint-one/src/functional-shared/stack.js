@@ -13,17 +13,17 @@ var stackMethods = {
   //this feels problematic but not sure where else to put it
   storage: {},
   push: function(value){
-    var nextKey = stackMethods.size()+1;
+    var nextKey = stackMethods.size();
     stackMethods.storage[nextKey] = value;
   },
   pop: function(){
-    var lastIn = stackMethods.storage[stackMethods.size()];
-    delete stackMethods.storage[stackMethods.size()];
+    var lastKey = stackMethods.size()-1;
+    var lastIn = stackMethods.storage[lastKey];
+    delete stackMethods.storage[lastKey];
     return lastIn;
   },
   size: function(){
     return Object.keys(stackMethods.storage).length;
   }
 };
-
 
