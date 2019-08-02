@@ -14,18 +14,15 @@ var stackMethods = {
   storage: {},
   push: function(value){
     var nextKey = stackMethods.size();
-    debugger
     stackMethods.storage[nextKey] = value;
   },
   pop: function(){
-    debugger
     var lastKey = stackMethods.size()-1;
     var lastIn = stackMethods.storage[lastKey];
     delete stackMethods.storage[lastKey];
     return lastIn;
   },
   size: function(){
-    debugger
     return Object.keys(stackMethods.storage).length;
   }
 };

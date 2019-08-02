@@ -2,6 +2,8 @@ var Queue = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
   var someQueueInstance = Object.create(queueMethods);
+  queueMethods.front = 0
+  queueMethods.back = 0
   return someQueueInstance;
 };
 
