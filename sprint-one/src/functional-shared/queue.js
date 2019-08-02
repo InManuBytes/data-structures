@@ -4,6 +4,8 @@ var Queue = function() {
   // Declaring the variable below means that we do not extend the constructor function
   //i.e. that the Object.keys(Queue).length = 0
   var someQueueInstance = {};
+  //we need to reset the storage everytime
+  queueMethods.storage = {};
   someQueueInstance.enqueue = queueMethods.enqueue;
   someQueueInstance.dequeue = queueMethods.dequeue;
   someQueueInstance.size = queueMethods.size;
@@ -11,23 +13,24 @@ var Queue = function() {
 };
 
 var queueMethods = {
-  //this feels problematic but not sure where else to put it
-  storage: {},
+  storage:{},
   enqueue: function(value){
     var nextKey = queueMethods.size();
     queueMethods.storage[nextKey] = value;
   },
   dequeue: function(){
-    let firstIn = queueMethods.storage[0];
-    delete queueMethods.storage[0];
-    keys = Object.keys(queueMethods.storage);
-    keys.forEach(key => {
-      newKey = Number(key)-1;
-      oldKey = Number(key);
-      queueMethods.storage[newKey] = queueMethods.storage[oldKey];
-      delete queueMethods.storage[oldKey];
-    });
-    return firstIn;
+    if (queueMethods.size()>0){
+      let firstIn = queueMethods.storage[0];
+      delete queueMethods.storage[0];
+      keys = Object.keys(queueMethods.storage);
+      keys.forEach(function(element) {
+        var newKey = Number(element)-1;
+        var oldKey = Number(element);
+        queueMethods.storage[newKey] = queueMethods.storage[oldKey];
+        delete queueMethods.storage[oldKey];
+      });
+      return firstIn;
+    }
   },
   size: function(){
     return Object.keys(queueMethods.storage).length;

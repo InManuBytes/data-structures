@@ -2,27 +2,30 @@
 var Stack = function() {
   // Declaring the variable below means that we do not extend the constructor function
   //i.e. that the Object.keys(Queue).length = 0
-  var someQueueInstance = {};
-  someQueueInstance.push = stackMethods.push;
-  someQueueInstance.pop = stackMethods.pop;
-  someQueueInstance.size = stackMethods.size;
-  return someQueueInstance;
+  var someStackInstance = {};
+  stackMethods.storage = {};
+  someStackInstance.push = stackMethods.push;
+  someStackInstance.pop = stackMethods.pop;
+  someStackInstance.size = stackMethods.size;
+  return someStackInstance;
 };
 
 var stackMethods = {
-  //this feels problematic but not sure where else to put it
   storage: {},
   push: function(value){
     var nextKey = stackMethods.size();
+    debugger
     stackMethods.storage[nextKey] = value;
   },
   pop: function(){
+    debugger
     var lastKey = stackMethods.size()-1;
     var lastIn = stackMethods.storage[lastKey];
     delete stackMethods.storage[lastKey];
     return lastIn;
   },
   size: function(){
+    debugger
     return Object.keys(stackMethods.storage).length;
   }
 };
