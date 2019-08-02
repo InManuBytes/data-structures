@@ -7,8 +7,7 @@ var Queue = function() {
   // Implement the methods below
   someInstance.enqueue = function(value) {
     //Remember: add at the end
-    var size = someInstance.size();
-    var nextKey = (size>0) ? size++: 0;
+    var nextKey = someInstance.size();
     storage[nextKey] = value;
   };
 
@@ -19,10 +18,10 @@ var Queue = function() {
     delete storage[0];
     var keys = Object.keys(storage);
     //go over each key and decrease by 1
-    for (var i=0; i<keys.length;i++){
-      storage[Number(keys[i])-1]=storage[keys[i]]; //assign to previous key -> move one step in line
-      delete storage[keys[i]]; //delete that previous key
-    }
+    keys.forEach(key=> {
+      storage[Number(key)-1]=storage[key];     //assign to previous key -> move one step in line
+      delete storage[key];     //delete that previous key
+    });
     return dequeueValue;
   };
 
