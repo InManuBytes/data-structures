@@ -24,21 +24,6 @@ var extend = function(destination,newObject) {
  *
  *
  */
-// tree = {
-//   value: undefined, -> can call it parent?
-//   children: [
-//         {value: 5,
-//          children: [
-//            {value: 7,
-//             children: []
-//            }
-//          ]
-//         },
-//         {value: 6,
-//          children: []
-//         }
-//   ]
-// }
 
 var treeMethods = {};
 
@@ -50,11 +35,46 @@ treeMethods.addChild = function(value) {
   var child = Tree(value) //where to invoke? - replicating a tree = subtree
   this.children.push(child)
   // push to the parent
-
-
 };
 
-treeMethods.contains = function(target) {
+// tree = {
+//   value: undefined, -> can call it parent?
+//   children: [
+//         {value: 5,
+//          children: [
+//            {value: 7,
+//             children: []
+//            }
+//          ]
+//         },
+//         {value: 6,
+//          children: [
+//              {value: 8,
+    //             children: []
+    //                 }
+//   ]
+// }
+
+//returns a boolean
+treeMethods.contains = function(target, node) {
+  // checking each node if it matches the target - checking the value
+  if (node === undefined){
+    node = this;
+  }
+  if (node.value === target) {
+    // if it does returns true
+    return true;
+   } else if (node.children.length > 0) {
+    // go through each child of the parent node and check its children too
+      for (var i = 0; i < node.children.length; i++){
+        return node.contains(target, node.children[i]); //how can we nest into the children?
+      }
+    } else {
+      return false;
+    }
+
+  // if it doesn't keep going and check every node
+  // check if it has children and then recurse into them
 };
 
 
