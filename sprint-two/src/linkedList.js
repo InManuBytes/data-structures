@@ -13,6 +13,17 @@ var LinkedList = function() {
     //5. we check what node the tail points to and
     //6. assign its .next to be this new Node's value
     //7. and then reassign the tail to be the this new Node's value as well
+    var newNode = new Node(value);
+
+    if (list.head === null) {
+      list.head = newNode;
+      // adding this: assign tail to node
+      list.tail = newNode;
+    } else {
+      list.tail.next = newNode;
+      list.tail = newNode;
+    }
+
   };
 
   // removes the first node from the list and returns its value
@@ -21,6 +32,15 @@ var LinkedList = function() {
     // we reassign the head to be the first node's .next node
     // delete that first node
     // return the first node's value we saved from the first step
+    if (this.head !== null) {
+      var oldHead = this.head;
+      delete this.head;
+      this.head = this.head.next;
+      return oldHead;
+    } else {
+      return null;
+    }
+
   };
 
   //returns boolean reflecting whether or not the passed-in value is in the linked list
@@ -34,6 +54,7 @@ var LinkedList = function() {
     // if not check if the node's .next points to something
     // call the contains function again on that node
     // else return false
+
   };
 
   return list;
