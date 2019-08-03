@@ -34,9 +34,8 @@ var LinkedList = function() {
     // return the first node's value we saved from the first step
     if (this.head !== null) {
       var oldHead = this.head;
-      delete this.head;
       this.head = this.head.next;
-      return oldHead;
+      return oldHead.value;
     } else {
       return null;
     }
@@ -45,15 +44,32 @@ var LinkedList = function() {
 
   //returns boolean reflecting whether or not the passed-in value is in the linked list
   list.contains = function(target, node) {
+    // example list = {node1, node2}
+    // node1 => {value: value1, next: node2}
+    // target = value we input
+    // check the object  - node of the list
+    // since we know the key will always be value we an look at value key for each node
     // we create a place to save our result, which will be a boolean
-    // we can add a extra argument to make this function recursive ^see the argument next to target
+    // var result = false;
+    // we don't need this since we can just return it directly
+    // we can add an extra argument to make this function recursive ^see the argument next to target
     // if node is undefined this is the first use of the function
-    // so we set node to be the head since all the other nodes point to the next one from there
-    // check if the node's value is the same as the target
-    // if it is return the result
-    // if not check if the node's .next points to something
-    // call the contains function again on that node
-    // else return false
+
+    // list.contains(target) - first time it's called
+    if (node === undefined){
+     // so we set node to be the head since all the other nodes point to the next one from there
+      node = this.head;
+    }
+    // see if value matches target
+    // if it does return true -> exit out?
+    // else if it doesn't match target move onto next
+    if (node.value === target) {
+      return true;
+    } else if (node.next === null) {
+      return false;
+    } else {
+      return list.contains(target, node.next);
+    }
 
   };
 
@@ -72,3 +88,10 @@ var Node = function(value) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+ // Node - Constructor
+ // addToTail - constant O(1)
+ // removeHead - constant O(1)
+ // contains - linear O(n)
+
+ // In conclusion - O(n) -> worst case for contains
