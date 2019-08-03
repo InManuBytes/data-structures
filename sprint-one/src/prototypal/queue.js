@@ -12,19 +12,17 @@ var queueMethods = {
   storage: {},
   //we'll keep track of who's at the front and who's at the back [numerical key]
   //since those are the two that matter for modifying the queue
-  //this will help us get the size of the queue
+  //will help us get the size of the queue
   front: 0,
   back: 0,
-  enqueue: function(value){
-    debugger
+  enqueue: function(value) {
     var nextKey = queueMethods.back;
     queueMethods.back++;
     queueMethods.storage[nextKey] = value;
   },
-  dequeue: function(){
-    debugger
+  dequeue: function() {
     //if there's nothing in the queue, might as well not do anything
-    if (queueMethods.size() > 0){
+    if (queueMethods.size() > 0) {
       //we'll save the value so we can return it after deleting it
       var firstIn = queueMethods.storage[queueMethods.front];
       delete queueMethods.storage[queueMethods.front];
@@ -33,8 +31,8 @@ var queueMethods = {
       return firstIn;
     }
   },
-  size: function(){
-    return queueMethods.back-queueMethods.front;
+  size: function() {
+    return queueMethods.back - queueMethods.front;
   }
 };
 
