@@ -54,24 +54,17 @@ treeMethods.addChild = function(value) {
     //                 }
 //   ]
 // }
-
 //returns a boolean
-treeMethods.contains = function(target, node) {
+treeMethods.contains = function(target) {
   // checking each node if it matches the target - checking the value
-  if (node === undefined){
-    node = this;
-  }
-  if (node.value === target) {
-    // if it does returns true
-    return true;
-   } else if (node.children.length > 0) {
+  var result = (this.value === target);
+  if (this.children.length > 0) {
     // go through each child of the parent node and check its children too
-      for (var i = 0; i < node.children.length; i++){
-        return node.contains(target, node.children[i]); //how can we nest into the children?
+      for (var i = 0; i < this.children.length; i++){
+        result = result || this.children[i].contains(target); //how can we nest into the children?
       }
-    } else {
-      return false;
     }
+  return (result);
 
   // if it doesn't keep going and check every node
   // check if it has children and then recurse into them
@@ -82,3 +75,7 @@ treeMethods.contains = function(target, node) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+ // extend  - linear O(n) -> in our case it's constant for every instance of a tree
+ // addChild - you're pushing to an array => constant because you're inserting at the end O(1)
+ // contains - polynomial depends on the height of the tree? - O(n^k) - k if a node has a child [revisit?]
