@@ -16,15 +16,6 @@ var extend = function(destination,newObject) {
   }
 }
 
-//example
-/**
- * Tree().addChild(5)
- * Tree().addChild(6)
- * Tree().children[0].addChild(7)
- *
- *
- */
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
@@ -37,23 +28,32 @@ treeMethods.addChild = function(value) {
   // push to the parent
 };
 
-// tree = {
-//   value: undefined, -> can call it parent?
-//   children: [
-//         {value: 5,
-//          children: [
-//            {value: 7,
-//             children: []
-//            }
-//          ]
-//         },
-//         {value: 6,
-//          children: [
-//              {value: 8,
-    //             children: []
-    //                 }
-//   ]
-// }
+//example
+/**
+ * Tree().addChild(5)
+ * Tree().addChild(6)
+ * Tree().children[0].addChild(7)
+ *
+ *
+ */
+/* tree = {
+  value: undefined, -> can call it parent?
+  children: [
+        {value: 5,
+         children: [
+           {value: 7,
+            children: []
+           }
+         ]
+        },
+        {value: 6,
+         children: [
+             {value: 8,
+            children: []
+                }
+  ]
+} */
+
 //returns a boolean
 treeMethods.contains = function(target) {
   // checking each node if it matches the target - checking the value
@@ -65,9 +65,6 @@ treeMethods.contains = function(target) {
       }
     }
   return (result);
-
-  // if it doesn't keep going and check every node
-  // check if it has children and then recurse into them
 };
 
 
