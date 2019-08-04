@@ -1,11 +1,18 @@
-
+// pseudoclassical style
 
 // Instantiate a new graph
 var Graph = function() {
+  //add stuff that only graphs have
+  // graphs have nodes
+  // each node has an unordered pair - edges
+  // Graph = {node1: [edge1, edge2,...], node2: [edge1, edge2, ..]}
+  this.nodes = {};
 };
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  // whenever we add a node we just add it as a key and assign its value to be an empty array
+  this.nodes[node] = [];
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
