@@ -47,5 +47,5 @@ HashTable.prototype.remove = function(k) {
 /*
  * Complexity: What is the time complexity of the above functions? O(1)
  */
-
+// if the hash function is linear, doesn't this mean our own is linear?
 
