@@ -1,6 +1,7 @@
 var Set = function() {
   var set = Object.create(setPrototype);
   set._storage = []; // will I be an object? or an array?
+  // to refactor this we have to create a LimitedArray instead
   return set;
 };
 
@@ -15,12 +16,15 @@ setPrototype.add = function(item) {
 };
 
 setPrototype.contains = function(item) {
-  //loop through the storage array and find matching item
+  // loop through the storage array and find matching item
+  // to refactor we just have to find the corresponding index
+  // use .retrieve(index) and check if it's undefined
   return this._storage.includes(item);
 
 };
 
 setPrototype.remove = function(item) {
+  // removing would be the same as the remove function in the hashTable
   if (this.contains(item)) {
     var itemIdx = this._storage.indexOf(item)
     this._storage.splice(itemIdx,1);
