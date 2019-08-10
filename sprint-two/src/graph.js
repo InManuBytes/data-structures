@@ -32,13 +32,12 @@ Graph.prototype.removeNode = function(node) { //O(N) -> nodes => polynomial wrt 
   // find out which index the node locates in the array
   // checking if that node exists in the array
   if (nodeIdx > -1) {
-    this.nodes.splice(nodeIdx,1)
+    this.nodes.splice(nodeIdx, 1)
   }
   // remove edges later
-  debugger;
   for (let i = 0; i < this.edges.length; i++) { // O(N^2)
     if (this.edges[i].includes(node)) {
-      this.edges.splice(i,1); // O(N)
+      this.edges.splice(i, 1); // O(N)
       i--;
     }
   }
@@ -69,7 +68,6 @@ Graph.prototype.removeEdge = function(fromNode, toNode) { //O(N^2)
   for (let i = 0; i < this.edges.length; i++) {
     if ((this.edges[i][0] === fromNode && this.edges[i][1] === toNode)||(this.edges[i][0] === toNode && this.edges[i][1] === fromNode)) {
       this.edges.splice(i,1);
-      debugger
       i--; // because we took an element out
     }
   }
