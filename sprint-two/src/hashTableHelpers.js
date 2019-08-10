@@ -23,9 +23,11 @@ var LimitedArray = function(limit) {
     checkLimit(index);
     storage[index] = value;
   };
+
   limitedArray.each = function(callback) { // O(N) where N is the limit
     for (var i = 0; i < storage.length; i++) {
       callback(storage[i], i, storage);
+
     }
   };
 

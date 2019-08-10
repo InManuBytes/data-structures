@@ -1,8 +1,8 @@
 var HashTable = function() {
+  debugger
   this._limit = 8;
   this._storage = LimitedArray(this._limit); //so has access to .get(index), .set(index,value), and .each(callback)
-  this._items = 0; // when this is 1 less than limit double size
-  // you don't halve it unless you already doubled it
+  this._items = 0; // when this is 75% full double size, when it's 25% empty halve it
 };
 HashTable.prototype.insert = function(k, v) {
   // according to the helper functions k should be a string
@@ -31,22 +31,54 @@ HashTable.prototype.insert = function(k, v) {
     this._storage.set(index, currentBucket); // and put it in our HashTable
     this._items++; //increase the counter since we're using space in the LimitedArray
   }
-  if (this._items === this._limit - 1) {
-// update the limit if there is only 2 spots left
-    this._limit *= 2; //double the size of the array
-    var ourHashTable // make a new HashTable?
-    this._storage.each(function (bucket, index, storage) { //storage[i], i, storage
-      if (bucket !== undefined) {
-        // go through each bucket to each tuple
-        // insert
-        for (var i = 0; i < bucket.length; i++) {
-          debugger
-          ourHashTable.insert(bucket[i][0],bucket[i][1]);
+  // check the size
+  var currentCapacity = this._items/this._limit;
+  if (currentCapacity >= .75) {
+    this.resize('double');
+  } else if (currentCapacity <= .25 && this._limit > 8) {
+    this.resize('halve');
+  }
+
+};
+
+HashTable.prototype.resize = function(factor) {
+  if (factor === 'double') {
+    this._limit *= 2;
+  } else if (factor === 'halve') {
+    this._limit /= 2;
+  }
+  var limit = this._limit; //16
+  debugger
+  var resizeArray = LimitedArray(limit); //0-16
+  this._storage.each(function(bucket, index, storage) {
+    if (bucket !== undefined) {
+      for (var i = 0; i < bucket.length; i++) {
+        var key = bucket[i][0];
+        var value = bucket[i][1];
+        var index = getIndexBelowMaxForKey(key, limit); //0-16
+        var currentBucket = resizeArray.get(index); //
+        var tuple = [key,value];
+        if (currentBucket !== undefined) {
+          var collision = true; // otherwise, collision
+          for (let i = 0; collision === true && i < currentBucket.length; i++) {
+            var currentTupleKey = currentBucket[i][0];
+            if (currentTupleKey === key) { // if we have a previously used key we should overwrite the value
+              currentBucket[i] = tuple; //overwrite
+              collision = false; //get out of the loop
+            } else if (i === currentBucket.length - 1) {
+              currentBucket.push(tuple);
+            }
+          }
+        } else {
+          currentBucket = []; //create a bucket
+          currentBucket.push(tuple); // [[k,v]] throw our tuple in the bucket
+          resizeArray.set(index, currentBucket); // and put it in our HashTable
         }
       }
-    })//use .set over every single bucket to put into our new Storage
-  }
-};
+    }
+  });
+}
+
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
@@ -75,6 +107,9 @@ HashTable.prototype.remove = function(k) {
         currentBucket.splice(i, 1); //take out that tuple from our bucket
       }
     }
+  } else {
+    // want to return something if that condition is not true
+    // write a test for it
   }
 };
 
