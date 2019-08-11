@@ -37,4 +37,19 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
   });
+  it('should only accept numbers as values', function() {
+    expect(binarySearchTree.insert('Hello World')).to.equal('Not a number');
+    expect(binarySearchTree.contains('Hello World')).to.equal('Not a number');
+  })
+  xit('should have a height property', function() {
+    expect(binarySearchTree.height).to.be.a('number');
+  });
+
+  xit('should return the right height of the tree', function() {
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+    expect(binarySearchTree.height).to.equal(2);
+  });
 });

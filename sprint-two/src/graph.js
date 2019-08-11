@@ -28,11 +28,14 @@ Graph.prototype.contains = function(node) { // O(N)
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) { //O(N) -> nodes => polynomial wrt edges
   // declare a node index variable to keep track
+
   var nodeIdx = this.nodes.indexOf(node);
   // find out which index the node locates in the array
   // checking if that node exists in the array
   if (nodeIdx > -1) {
     this.nodes.splice(nodeIdx, 1)
+  } else {
+    return 'Node doesn\'t exist';
   }
   // remove edges later
   for (let i = 0; i < this.edges.length; i++) { // O(N^2)

@@ -8,13 +8,17 @@ var Set = function() {
 var setPrototype = {};
 // items => strings
 setPrototype.add = function(item) {
-  this._storage.insert(item, item);
+  if (this.contains(item)) {
+    return 'You\'ve already added this value'
+  } else {
+    this._storage.insert(item, item);
+  }
   // OLD CODE
-  //add item to storage
+  // add item to storage
   // if(!this.contains(item)) {
   //   this._storage.push(item);
   // }
-  //let's not add things twice
+  // let's not add things twice
 };
 
 setPrototype.contains = function(item) {

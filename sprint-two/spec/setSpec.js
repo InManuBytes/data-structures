@@ -24,4 +24,8 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  it('should alert when adding the same value twice', function() {
+    set.add('Susan Sarandon');
+    expect(set.add('Susan Sarandon')).to.equal('You\'ve already added this value')
+  })
 });

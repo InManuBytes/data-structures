@@ -25,18 +25,22 @@ var BinarySearchTree = function(value) {
 //
 //               5
 //            /    \
-//          2    .right
-//        / \
-//     .left .right
+//          2
+//        /
+//      1
 
 var binarySearchMethods = {
   // A .insert() method, which accepts a value and places it in the tree in the correct position.
   insert: function (value) {
+    if (typeof value !== 'number') {
+      return 'Not a number'
+    }
     // you have to check if your value is bigger or smaller than this.value
     if (value < this.value) { // lower than go into the left
       // before you assign that value to the left you have to check if it already has a "child"
       if (this.left === null) { // if it doesn't - it's a leaf
         this.left = BinarySearchTree(value); // to insert you make it into a tree itself for future insertion
+
       } else { // if it does have children just run this recursively
         this.left.insert(value);
       }
@@ -51,6 +55,9 @@ var binarySearchMethods = {
   //A .contains() method, which accepts a value and returns a boolean
   //reflecting whether or not the value is contained in the tree.
   contains: function (value) {
+    if (typeof value !== 'number') {
+      return 'Not a number'
+    }
     if (value === this.value) {
       return true;
     } else if (this.left !== null && value < this.value) {
