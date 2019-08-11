@@ -41,4 +41,8 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should only accept numbers', function() {
+    expect(tree.addChild('Hi, I\'m a tree')).to.equal('sorry only accept numbers at this time')
+  });
+
 });

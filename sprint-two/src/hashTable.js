@@ -108,8 +108,7 @@ HashTable.prototype.remove = function(k) {
       }
     }
   } else {
-    // want to return something if that condition is not true
-    // write a test for it
+    return 'Key not found';
   }
 };
 

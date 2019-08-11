@@ -3,7 +3,7 @@ var Tree = function(value) {
   newTree.value = value; // first value = undefined
   // functional-shared style
   extend(newTree, treeMethods);
-  newTree.children = []; // fix me => set to null originally
+  newTree._children = []; // fix me => set to null originally
   return newTree;
 };
 
@@ -18,8 +18,11 @@ var treeMethods = {};
 treeMethods.addChild = function(value) {
   // newTree.children -> array
   // set newTree.value to input value
-  var child = Tree(value); //where to invoke? - replicating a tree = subtree
-  this.children.push(child); // push to the parent
+  if (typeof value !== 'number') {
+    return 'sorry only accept numbers at this time'
+  }
+  var _child = Tree(value); //where to invoke? - replicating a tree = subtree
+  this._children.push(_child); // push to the parent
 };
 
 //example
@@ -45,14 +48,14 @@ treeMethods.addChild = function(value) {
 //returns a boolean
 treeMethods.contains = function(target) {
   // checking each node if it matches the target - checking the value
-  var result = (this.value === target);
-  if (this.children.length > 0) {
+  var _result = (this.value === target);
+  if (this._children.length > 0) {
     // go through each child of the parent node and check its children too
-    for (var i = 0; i < this.children.length; i++) {
-      result = result || this.children[i].contains(target); //how can we nest into the children?
+    for (var i = 0; _result === false && i < this._children.length; i++) {
+      _result = this._children[i].contains(target); //how can we nest into the children?
     }
   }
-  return result;
+  return _result;
 };
 
 /*

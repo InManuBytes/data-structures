@@ -9,9 +9,9 @@
 var BinarySearchTree = function(value) {
   var newBinaryTree = Object.create(binarySearchMethods);
   //binary search trees have at least one inherent property: the starting value
-  newBinaryTree.value = value;
-  newBinaryTree.right = null;
-  newBinaryTree.left = null;
+  newBinaryTree._value = value;
+  newBinaryTree._right = null;
+  newBinaryTree._left = null;
   return newBinaryTree;
 };
 //              5
@@ -36,19 +36,19 @@ var binarySearchMethods = {
       return 'Not a number'
     }
     // you have to check if your value is bigger or smaller than this.value
-    if (value < this.value) { // lower than go into the left
+    if (value < this._value) { // lower than go into the left
       // before you assign that value to the left you have to check if it already has a "child"
-      if (this.left === null) { // if it doesn't - it's a leaf
-        this.left = BinarySearchTree(value); // to insert you make it into a tree itself for future insertion
+      if (this._left === null) { // if it doesn't - it's a leaf
+        this._left = BinarySearchTree(value); // to insert you make it into a tree itself for future insertion
 
       } else { // if it does have children just run this recursively
-        this.left.insert(value);
+        this._left.insert(value);
       }
     } else {
-      if (this.right === null) { // if it doesn't
-        this.right = BinarySearchTree(value); //assign the value
+      if (this._right === null) { // if it doesn't
+        this._right = BinarySearchTree(value); //assign the value
       } else { // if it does just run this recursively
-        this.right.insert(value);
+        this._right.insert(value);
       }
     }
   },
@@ -58,12 +58,12 @@ var binarySearchMethods = {
     if (typeof value !== 'number') {
       return 'Not a number'
     }
-    if (value === this.value) {
+    if (value === this._value) {
       return true;
-    } else if (this.left !== null && value < this.value) {
-      return this.left.contains(value);
-    } else if (this.right !== null && value > this.value) {
-      return this.right.contains(value);
+    } else if (this._left !== null && value < this._value) {
+      return this._left.contains(value);
+    } else if (this._right !== null && value > this._value) {
+      return this._right.contains(value);
     } else {
       return false;
     }
@@ -72,12 +72,12 @@ var binarySearchMethods = {
   depthFirstLog: function (callBack) {
     //start on the left and then go right
     //we want to build a call stack
-    callBack(this.value);
-    if (this.left !== null) {
-      this.left.depthFirstLog(callBack);
+    callBack(this._value);
+    if (this._left !== null) {
+      this._left.depthFirstLog(callBack);
     }
-    if (this.right !== null) {
-      this.right.depthFirstLog(callBack);
+    if (this._right !== null) {
+      this._right.depthFirstLog(callBack);
     }
   }
 };

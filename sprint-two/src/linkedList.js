@@ -1,27 +1,27 @@
 var LinkedList = function() {
   var list = {};
-  list.head = null;
-  list.tail = null;
+  list._head = null;
+  list._tail = null;
 
   //takes a value and adds it to the end of the list
   list.addToTail = function(value) {
     //since each value in the list is actually a node we'd want to
     //1. create a Node to store the value
-    //2. then we need to check if head is null so we know if the list is empty
-    //3. if it's null we need change the head to point at the value of this node
+    //2. then we need to check if _head is null so we know if the list is empty
+    //3. if it's null we need change the _head to point at the value of this node
     //4. otherwise if the list is not empty
-    //5. we check what node the tail points to and
+    //5. we check what node the _tail points to and
     //6. assign its .next to be this new Node's value
-    //7. and then reassign the tail to be the this new Node's value as well
-    var newNode = new Node(value);
+    //7. and then reassign the _tail to be the this new Node's value as well
+    var _newNode = new Node(value);
 
-    if (list.head === null) {
-      list.head = newNode;
-      // adding this: assign tail to node
-      list.tail = newNode;
+    if (list._head === null) {
+      list._head = _newNode;
+      // adding this: assign _tail to node
+      list._tail = _newNode;
     } else {
-      list.tail.next = newNode;
-      list.tail = newNode;
+      list._tail.next = _newNode;
+      list._tail = _newNode;
     }
 
   };
@@ -29,12 +29,12 @@ var LinkedList = function() {
   // removes the first node from the list and returns its value
   list.removeHead = function() {
     // first we have to save the first node's value to a variable so we can return it after we remove it
-    // we reassign the head to be the first node's .next node
+    // we reassign the _head to be the first node's .next node
     // delete that first node
     // return the first node's value we saved from the first step
-    if (this.head !== null) {
-      var oldHead = this.head;
-      this.head = this.head.next;
+    if (this._head !== null) {
+      var oldHead = this._head;
+      this._head = this._head.next;
       return oldHead.value;
     } else {
       return null;
@@ -57,8 +57,8 @@ var LinkedList = function() {
 
     // list.contains(target) - first time it's called
     if (node === undefined){
-     // so we set node to be the head since all the other nodes point to the next one from there
-      node = this.head;
+     // so we set node to be the _head since all the other nodes point to the next one from there
+      node = this._head;
     }
     // see if value matches target
     // if it does return true -> exit out?
@@ -76,7 +76,7 @@ var LinkedList = function() {
   return list;
 };
 
-var Node = function(value) {
+var Node = function(value) { // should this be private too?
   var node = {};
 
   node.value = value;
